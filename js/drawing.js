@@ -265,12 +265,12 @@ function plotScores_Highcharts() {
       xAxis: {
         categories: p_o.p_labels,
         title: {
-          text: 'Guess Index'
+          text: ''
         }
       },
       yAxis: {
         title: {
-          text: 'Guess Score'
+          text: ''
         }
       },
       tooltip: {

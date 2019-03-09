@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Drawing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" href="css/w3.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="quasar-logo.png" type="image/x-icon">
+</head>
+
+<body>
+  <button class="w3-btn w3-ripple w3-blue" id="btnClear" onclick="clearDrawing()">clear</button>
+  <div id="wrapper">
+    <canvas id="canvas" resize></canvas>
+    <br>
+    <div id="plot"></div>
+  </div>
+
+  <!-- Trigger/Open The Modal -->
+  <button class="w3-btn w3-ripple w3-blue" id="btnInfo">x</button>
+
+  <!-- The Modal -->
+  <div id="info" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      
+      <div class="start"><span class="close">Got it!</span></div>
+     
+    </div>
+
+  </div>
+
+  <script src='js/paper-0.9.25.min.js'></script>
+  <script src='js/highcharts-5.0.4.min.js'></script>
+  <script src="js/drawing.js"></script>
+
+</body>
+</html>

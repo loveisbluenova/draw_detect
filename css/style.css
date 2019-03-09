@@ -88,16 +88,21 @@ body > button {
   text-align: center;
   font-size: 50px;
 }
-.start {
+/*.start {
   margin: 430px;
-}
+}*/
 /* The Close Button */
-.close {
+.got-btn{
     color: #aaa;
     font-size: 28px;
     font-weight: bold;
+    padding-top: 50%;
+    text-align: center;
+    float: none !important;
 }
-
+.got-window{
+  margin-top: 50vh;
+}
 .close:hover,
 .close:focus {
     color: black;

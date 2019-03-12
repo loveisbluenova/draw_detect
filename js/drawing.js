@@ -11,43 +11,6 @@ window.onload = function() {
 
   var tool = new Tool();  
 
-$(document).ready(function() {
-      
-  clock = $('.clock').FlipClock(20, {
-      clockFace: 'MinuteCounter',
-      countdown: true,
-      autoStart: false,
-      callbacks: {
-        start: function() {
-          $('.message').html('The clock has started!');
-        },
-        stop: function() {
-          $('.modal').css('display', 'block');
-          $('.messageout').html('Game over!');
-            clock.reset();
-        }
-       }
-        });
-
-      $('.start').click(function(e) {
-
-        clock.start();
-
-      });
-
-      $('#popup-quit-quit').click(function() {
-        $('.modal').css('display', 'block');
-          clock.reset();
-        $('#popup-quit').addClass('hidden');
-      });
-
-      $('#popup-quit-cancel').click(function() {
-        $('#popup-quit').addClass('hidden');
-      });
-
-      setTimeout(function() {$('body').css('opacity', 1);}, 300);
-  });
-
 
   tool.onMouseDown = function(event) {
  
@@ -270,10 +233,10 @@ function initInfoModal(){
 
       $('#popup-quit').removeClass('hidden');
   }
-  span.onclick = function() {
-      modal.style.display = "none";
-      clock.start();
-  }
+  // span.onclick = function() {
+  //     modal.style.display = "none";
+  //     clock.start();
+  // }
 
 
   document.getElementById('info').style.display = "block";
@@ -285,3 +248,39 @@ function Clockflow(len) {
 
 
     
+$(document).ready(function() {
+      
+  clock = $('.clock').FlipClock(20, {
+      clockFace: 'MinuteCounter',
+      countdown: true,
+      autoStart: false,
+      callbacks: {
+        start: function() {
+          $('.message').html('The clock has started!');
+        },
+        stop: function() {
+          $('.modal').css('display', 'block');
+          $('.messageout').html('Game over!');
+            clock.reset();
+        }
+       }
+        });
+
+      $('.start').click(function(e) {
+
+        clock.start();
+
+      });
+
+      $('#popup-quit-quit').click(function() {
+        $('.modal').css('display', 'block');
+          clock.reset();
+        $('#popup-quit').addClass('hidden');
+      });
+
+      $('#popup-quit-cancel').click(function() {
+        $('#popup-quit').addClass('hidden');
+      });
+
+      setTimeout(function() {$('body').css('opacity', 1);}, 300);
+  });

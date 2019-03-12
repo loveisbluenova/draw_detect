@@ -1,0 +1,10 @@
+{
+  "manifest_version": 2,
+
+  "name": "Quick, Draw!",
+  "theme_color": "#ffd139",
+  "background_color": "#ffffff",
+  "display": "browser",
+  "scope": "/",
+  "start_url": "/"
+}

@@ -1,8 +1,7 @@
 var path, ink, chart, scores;
-
-var clock;
 var timer = 0, lastTimestamp = 0, lastTimestamp_check = 0, idx_guess = 0;
 var d_scores = {}
+var su, cc;
 paper.install(window);
 window.onload = function() {
 
@@ -11,12 +10,12 @@ window.onload = function() {
 
   var tool = new Tool();  
 
-
+  cc = su;
   tool.onMouseDown = function(event) {
  
     path = new Path();          
-    path.strokeColor = 'black'; 
-    path.strokeWidth = 7;
+    path.strokeColor = 'blue'; 
+    path.strokeWidth = 5;
 
     var thisTimestamp = event.event.timeStamp;
     if(timer === 0){
@@ -162,36 +161,16 @@ function plotScores_Highcharts() {
 
   var p_o = getData_Highcharts(); 
   var p_title = 'BEST GUESS: ' + scores[0][0] + ' (' + scores[0][1] + ')';
+  su = scores[0][0];
 
-  if ( $('.best-guess-word').text() == scores[0][0]) {
-    $('.message').html('Successful!');
-  } else {
-    $('.message').html('failed!');
-  }
-
-  $('.best-guess-word').text(scores[0][0]);
+  $('.best-guess-word').text(su);
 
   chart = Highcharts.chart('plot', {
-      chart: {
-        backgroundColor: '#bfbfbf',
-        type: 'line'
-      },
+
       title: {
         text: p_title
       },
-      subtitle: {
-        text: ''
-      },
-      xAxis: {
-        categories: p_o.p_labels,
-        title: {
-          text: ''
-        }
-      },
 
-      tooltip: {
-        valueSuffix: ''
-      },
       legend: {
         enabled: false
       },
@@ -209,6 +188,55 @@ function createArray(len, itm) {
     }
     return arr2;
 }
+
+var clock;
+    
+$(document).ready(function() {
+      
+  clock = $('.clock').FlipClock(20, {
+      clockFace: 'MinuteCounter',
+      countdown: true,
+      autoStart: false,
+      callbacks: {
+        start: function() {
+          // $('.message').html('The clock has started!');
+        },
+        stop: function() {
+          $('.modal').css('display', 'block');
+
+          if (su == cc) {
+            $('.messageout').html('Succesfull!');
+          }else{
+            $('.messageout').html('Game over!');
+          }
+
+          paper.project.activeLayer.removeChildren();
+          paper.view.draw();
+          clock.reset();
+
+
+        }
+      }
+  });
+
+    $('.start').click(function(e) {
+
+      clock.start();
+
+    });
+
+    $('#popup-quit-quit').click(function() {
+      $('.modal').css('display', 'block');
+        clock.stop();
+      $('#popup-quit').addClass('hidden');
+    });
+
+    $('#popup-quit-cancel').click(function() {
+      $('#popup-quit').addClass('hidden');
+    });
+
+    setTimeout(function() {$('body').css('opacity', 1);}, 600);
+});
 
 function initInfoModal(){
 
@@ -229,15 +257,27 @@ function initInfoModal(){
       idx_guess = 0;
       d_scores = {};
 
-      chart.destroy(); 
+      
+      if (chart)
+        chart.destroy(); 
 
       $('#popup-quit').removeClass('hidden');
   }
-  // span.onclick = function() {
-  //     modal.style.display = "none";
-  //     clock.start();
-  // }
+  span.onclick = function() {
+      modal.style.display = "none";
+      clock.start();
+  }
+  $('#popup-quit-quit').click(function() {
+    $('.modal').css('display', 'block');
+      clock.stop();
+    $('#popup-quit').addClass('hidden');
+  });
 
+  $('#popup-quit-cancel').click(function() {
+    $('#popup-quit').addClass('hidden');
+  });
+
+    setTimeout(function() {$('body').css('opacity', 1);}, 600);  
 
   document.getElementById('info').style.display = "block";
   
@@ -247,40 +287,4 @@ function Clockflow(len) {
 }
 
 
-    
-$(document).ready(function() {
-      
-  clock = $('.clock').FlipClock(20, {
-      clockFace: 'MinuteCounter',
-      countdown: true,
-      autoStart: false,
-      callbacks: {
-        start: function() {
-          $('.message').html('The clock has started!');
-        },
-        stop: function() {
-          $('.modal').css('display', 'block');
-          $('.messageout').html('Game over!');
-            clock.reset();
-        }
-       }
-        });
 
-      $('.start').click(function(e) {
-
-        clock.start();
-
-      });
-
-      $('#popup-quit-quit').click(function() {
-        $('.modal').css('display', 'block');
-          clock.reset();
-        $('#popup-quit').addClass('hidden');
-      });
-
-      $('#popup-quit-cancel').click(function() {
-        $('#popup-quit').addClass('hidden');
-      });
-
-      setTimeout(function() {$('body').css('opacity', 1);}, 300);
-  });

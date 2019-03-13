@@ -1,7 +1,7 @@
 var path, ink, chart, scores;
 var timer = 0, lastTimestamp = 0, lastTimestamp_check = 0, idx_guess = 0;
 var d_scores = {}
-var su, cc;
+var su, cc, can;
 paper.install(window);
 window.onload = function() {
 
@@ -10,7 +10,7 @@ window.onload = function() {
 
   var tool = new Tool();  
 
-  cc = su;
+  cc = $('.best-guess-word').text();
   tool.onMouseDown = function(event) {
  
     path = new Path();          
@@ -158,13 +158,18 @@ function getData_Highcharts(){
 }
 
 function plotScores_Highcharts() {
-
-  var p_o = getData_Highcharts(); 
-  var p_title = 'BEST GUESS: ' + scores[0][0] + ' (' + scores[0][1] + ')';
   su = scores[0][0];
+  if (su == cc) {
+    can = 'Succesfull!';
+  }else{
+    can = 'failed!';
+  }
+  var p_o = getData_Highcharts(); 
+  var p_title = 'BEST GUESS: ' + scores[0][0] + ' (' + scores[0][1] + ')' + ' : ' + can ;
+  
 
-  $('.best-guess-word').text(su);
-
+  $('.best-guess-word').text(scores[1][0]);
+  
   chart = Highcharts.chart('plot', {
 
       title: {
@@ -200,6 +205,7 @@ $(document).ready(function() {
       callbacks: {
         start: function() {
           // $('.message').html('The clock has started!');
+          cc = $('.best-guess-word').text();
         },
         stop: function() {
           $('.modal').css('display', 'block');
@@ -251,16 +257,15 @@ function initInfoModal(){
       paper.project.activeLayer.removeChildren();
       paper.view.draw();
 
-      initInk();
+      // initInk();
   
-      timer = 0;
-      idx_guess = 0;
-      d_scores = {};
+      // timer = 0;
+      // idx_guess = 0;
+      // d_scores = {};
 
-      
-      if (chart)
-        chart.destroy(); 
-
+      // // cc = $('.best-guess-word').text();
+      // if (chart)
+      //   chart.destroy(); 
       $('#popup-quit').removeClass('hidden');
   }
   span.onclick = function() {
@@ -269,6 +274,7 @@ function initInfoModal(){
   }
   $('#popup-quit-quit').click(function() {
     $('.modal').css('display', 'block');
+
       clock.stop();
     $('#popup-quit').addClass('hidden');
   });

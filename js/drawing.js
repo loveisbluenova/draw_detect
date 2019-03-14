@@ -225,8 +225,8 @@ function plotScores_Highcharts() {
   
 
   $('.best-guess-word').text(scores[d][0]);
-  
-  chart = Highcharts.chart('plot', {
+  setTimeout(function(){
+    chart = Highcharts.chart('plot', {
 
       title: {
         text: p_title
@@ -238,6 +238,8 @@ function plotScores_Highcharts() {
 
       series: p_o.p_data
   });
+  }, 1000);
+  
 
     if (co == true) {
       setTimeout(function(){     
@@ -245,7 +247,7 @@ function plotScores_Highcharts() {
         clearDrawing();
         clock.stop();
         // $('.checkn').html('check');
-        $('#popup-quit').addClass('hidden'); }, 1000);
+        $('#popup-quit').addClass('hidden'); }, 2000);
     }
 };
 function createArray(len, itm) {

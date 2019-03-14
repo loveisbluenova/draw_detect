@@ -1,7 +1,9 @@
 var path, ink, chart, scores;
 var timer = 0, lastTimestamp = 0, lastTimestamp_check = 0, idx_guess = 0;
 var d_scores = {}
-var su, cc, can;
+var su, cc, can, co;
+var d;
+
 paper.install(window);
 window.onload = function() {
 
@@ -156,19 +158,73 @@ function getData_Highcharts(){
   return o;
 
 }
+var clock;
+    
+$(document).ready(function() {
+      
+  clock = $('.clock').FlipClock(20, {
+    clockFace: 'MinuteCounter',
+    countdown: true,
+    autoStart: false,
+    callbacks: {
+      start: function() {
+          // $('.message').html('The clock has started!');
+        cc = $('.best-guess-word').text();
+        d = Math.floor((Math.random() * 10) + 1);
+      },
+      stop: function() {
+        $('.modal').css('display', 'block');
+
+        if (su == cc) {
+          $('.messageout').html('Drawing is correct!');
+        }else{
+          $('.messageout').html('Drawing is failed!');
+        }
+
+        paper.project.activeLayer.removeChildren();
+        paper.view.draw();
+        clock.reset();
+      }
+    }
+  });
+  $('.start').click(function(e) {
+
+    clock.start();
+
+  });
+
+  $('.checkn').click(function(e) {
+
+    $('#timesup-card').css('display', 'block');
+
+  });
+  $('#popup-quit-quit').click(function() {
+    $('.modal').css('display', 'block');
+      clock.stop();
+    $('#popup-quit').addClass('hidden');
+  });
+
+  $('#popup-quit-cancel').click(function() {
+    $('#popup-quit').addClass('hidden');
+  });
+
+  setTimeout(function() {$('body').css('opacity', 1);}, 600);
+});
 
 function plotScores_Highcharts() {
   su = scores[0][0];
   if (su == cc) {
-    can = 'Succesfull!';
+    can = 'Succesful!';
+    co = true;
   }else{
-    can = 'failed!';
+    can = '  ';
+    co = false;
   }
   var p_o = getData_Highcharts(); 
-  var p_title = 'BEST GUESS: ' + scores[0][0] + ' (' + scores[0][1] + ')' + ' : ' + can ;
+  var p_title = 'I see : ' + scores[0][0] + ' : ' + can;
   
 
-  $('.best-guess-word').text(scores[1][0]);
+  $('.best-guess-word').text(scores[d][0]);
   
   chart = Highcharts.chart('plot', {
 
@@ -182,6 +238,15 @@ function plotScores_Highcharts() {
 
       series: p_o.p_data
   });
+
+    if (co == true) {
+      setTimeout(function(){     
+        $('.modal').css('display', 'block');
+        clearDrawing();
+        clock.stop();
+        // $('.checkn').html('check');
+        $('#popup-quit').addClass('hidden'); }, 1000);
+    }
 };
 function createArray(len, itm) {
     var arr1 = [itm],
@@ -191,58 +256,11 @@ function createArray(len, itm) {
         arr1 = arr1.concat(arr1);
         len >>>= 1;
     }
-    return arr2;
+    return arr2; 
+
 }
 
-var clock;
-    
-$(document).ready(function() {
-      
-  clock = $('.clock').FlipClock(20, {
-      clockFace: 'MinuteCounter',
-      countdown: true,
-      autoStart: false,
-      callbacks: {
-        start: function() {
-          // $('.message').html('The clock has started!');
-          cc = $('.best-guess-word').text();
-        },
-        stop: function() {
-          $('.modal').css('display', 'block');
 
-          if (su == cc) {
-            $('.messageout').html('Succesfull!');
-          }else{
-            $('.messageout').html('Game over!');
-          }
-
-          paper.project.activeLayer.removeChildren();
-          paper.view.draw();
-          clock.reset();
-
-
-        }
-      }
-  });
-
-    $('.start').click(function(e) {
-
-      clock.start();
-
-    });
-
-    $('#popup-quit-quit').click(function() {
-      $('.modal').css('display', 'block');
-        clock.stop();
-      $('#popup-quit').addClass('hidden');
-    });
-
-    $('#popup-quit-cancel').click(function() {
-      $('#popup-quit').addClass('hidden');
-    });
-
-    setTimeout(function() {$('body').css('opacity', 1);}, 600);
-});
 
 function initInfoModal(){
 
@@ -253,28 +271,25 @@ function initInfoModal(){
   var span = document.getElementsByClassName("close")[0];
 
   btn.onclick = function() {
-      
-      paper.project.activeLayer.removeChildren();
-      paper.view.draw();
-
-      // initInk();
-  
-      // timer = 0;
-      // idx_guess = 0;
-      // d_scores = {};
-
-      // // cc = $('.best-guess-word').text();
-      // if (chart)
-      //   chart.destroy(); 
+ 
       $('#popup-quit').removeClass('hidden');
   }
   span.onclick = function() {
       modal.style.display = "none";
       clock.start();
   }
+
+
+    $('.start').click(function(e) {
+
+    clock.start();
+
+  });
+
+
   $('#popup-quit-quit').click(function() {
     $('.modal').css('display', 'block');
-
+      clearDrawing();
       clock.stop();
     $('#popup-quit').addClass('hidden');
   });
@@ -283,14 +298,14 @@ function initInfoModal(){
     $('#popup-quit').addClass('hidden');
   });
 
+   $('.checkn').click(function(e) {
+
+    $('#timesup-card').css('display', 'block');
+
+  });
+
     setTimeout(function() {$('body').css('opacity', 1);}, 600);  
 
   document.getElementById('info').style.display = "block";
   
 }
-function Clockflow(len) {
-  
-}
-
-
-

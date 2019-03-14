@@ -1,6 +1,9 @@
 * {
   box-sizing: border-box;
+  text-decoration: none;
+
 }
+
 
 html, body {
   height: 100%;
@@ -115,13 +118,26 @@ body > button {
 .got-window{
   margin-top: 50vh;
 }
+
 .close:hover,
 .close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
+    margin-bottom: 25%;
+}
+.checking a {
+  text-decoration: none;
+}
+.checking a:hover,
+.checking a:focus,
+.checking a:active,{
+  text-decoration: none;
 }
 
+.startingbtn {
+  margin-bottom: 1%;
+}
 
 
 

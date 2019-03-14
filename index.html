@@ -74,12 +74,41 @@
       <div class="text-center messageout"></div>
       <div class="text-center type best-guess-word">potato</div>
       <div class="text-center time">in under 20 seconds</div>
-      <span class="close got-btn"><button class="start">Got it!</button></span>
+      <div class="startingbtn "><span class="close got-btn"><button class="start">Got it!</button></span></div>
+      <div class="checkingbtn"><span class="close got-btn"><button class="checking"><a class="checkn" href=" "></a></button></span></div>
     </div>
   </div>
 
-  <div class="popup-wrapper hidden" id="popup-quit" style="">
-    <div class="popup-box">
+  <div id="timesup-card" class="covercard">
+    <div class="card-container fill">
+      <div class="card-headline ">
+        <div id="timesup-title"></div>
+      </div>
+      <div class="card-row">
+        <div class="card-text" id="timesup-subtitle"></div>
+      </div>
+      <div class="card-row">
+        <div id="timesup-drawings-wrapper"></div>
+      </div>
+      <div class="card-row" id="portfolio">
+        <div class="card-text">
+          <div id="portfolio-text">Share your drawings</div>
+            <div>
+              <button id="share_portfolio_twitter" class="button button-twitter"></button>
+              <button id="share_portfolio_facebook" class="button button-facebook"></button>
+            </div>
+            <button id="button-timesup-play" class="button button-large button-green"><span class="center">Play Again</span></button>
+          </div>
+        </div>
+        <div class="card-footer"></div>
+      </div>
+      <div class="ui tr">
+        <button class="button button-close"></button>
+      </div>
+    </div>
+
+    <div class="popup-wrapper hidden" id="popup-quit" style="">
+      <div class="popup-box">
         <div class="popup-text"><span class="font-hand-2">A</span><span class="font-hand-2">r</span><span class="font-hand-1">e</span><span class="font-hand-1"> </span><span class="font-hand-2">y</span><span class="font-hand-1">o</span><span class="font-hand-2">u</span><span class="font-hand-2"> </span><span class="font-hand-3">s</span><span class="font-hand-3">u</span><span class="font-hand-1">r</span><span class="font-hand-3">e</span><span class="font-hand-3"> </span><span class="font-hand-2">y</span><span class="font-hand-3">o</span><span class="font-hand-1">u</span><span class="font-hand-3"> </span><span class="font-hand-1">w</span><span class="font-hand-1">a</span><span class="font-hand-3">n</span><span class="font-hand-2">t</span><span class="font-hand-1"> </span><span class="font-hand-1">t</span><span class="font-hand-1">o</span><span class="font-hand-1"> </span><span class="font-hand-1">q</span><span class="font-hand-1">u</span><span class="font-hand-3">i</span><span class="font-hand-3">t</span><span class="font-hand-1">?</span></div>
         <div class="popup-buttons">
           <button class="button button-large button-yellow" id="popup-quit-cancel"><span class="center">Cancel</span></button>
